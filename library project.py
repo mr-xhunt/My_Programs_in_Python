@@ -22,7 +22,11 @@ class Library:
     def libraryName(self):
         return self.lname
     def add_book(self, name_of_book):
-        return self.books.append(name_of_book)
+        for item in self.books:
+            if name_of_book == item:
+                print("This book is already present in the library!")
+            else:
+                return self.books.append(name_of_book)
     def lend_book(self, name_of_book, lender):
         self.dict[name_of_book] = lender
         return self.books.remove(name_of_book)
@@ -35,20 +39,25 @@ class Library:
 
 books = ["The Pshycology of Money", "Intelligent Investor", "Rich Dad Poor Dad", "Cashflow Quadrants", "Shrimad Bhagwat Gita"]
 library_1 = Library(books, "library 1")
-# x = library_1.disp_book()
-# y = library_1.libraryName()
-# print(x, y)
 
-# z = library_1.add_book("Python by Musx")
-# x = library_1.disp_book()
-# print(x)
+while True:
+    usrinp = input("What do you wish to do?\n1.Display Book\n2.Lend Book \n3.Add Book\n4.Return Book\n\n:")
 
-len = library_1.lend_book("Intelligent Investor", "Mayank")
-x = library_1.disp_book()
-print(x)
-print(library_1.dict)
+    if usrinp == "display":
+        x = library_1.disp_book()
+        y = library_1.libraryName()
+        print(x, y)
+    elif usrinp == "add":
+        z = library_1.add_book(input("Which book do you wish to add?\n"))
+    elif usrinp == "lend":
+        bookname = input("Which book do you wish to lend?\n")
+        Pname = input("What is your Name: ")
+        len = library_1.lend_book(bookname,Pname)
+    elif usrinp == "return":
+        ret = library_1.return_book(input("Which book do you wish to return?\n"))
+    else:
+        print("Invalid Operation")
 
-ret = library_1.return_book("Intelligent Investor")
-x = library_1.disp_book()
-print(x)
-print(library_1.dict)
+
+
+
