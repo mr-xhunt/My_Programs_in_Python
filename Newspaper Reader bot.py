@@ -1,6 +1,5 @@
 #reading newspaper
 
-# my_api = 7331fdb36de24beab56265b81b3bf1a0
 import requests
 import json
 import time
