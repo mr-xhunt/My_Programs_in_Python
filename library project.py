@@ -12,52 +12,59 @@
 
 
 
+from xml.dom import InvalidCharacterErr
+
+
 class Library:
-    def __init__(self, listofbooks, libraryname):
-        self.books = listofbooks
-        self.lname = libraryname
-        self.dict = {}
-    def disp_book(self):
-        return self.books
-    def libraryName(self):
-        return self.lname
-    def add_book(self, name_of_book):
-        for item in self.books:
-            if name_of_book == item:
-                print("This book is already present in the library!")
-            else:
-                return self.books.append(name_of_book)
-    def lend_book(self, name_of_book, lender):
-        self.dict[name_of_book] = lender
-        return self.books.remove(name_of_book)
+    def __init__(self, book_list, library_name):
+        self.book_list = book_list
+        self.library_name = library_name
+        self.lend_record = {}
 
-    def return_book(self, name_of_book):
-        self.dict.pop(name_of_book)
-        return self.books.append(name_of_book)
+    def display_book(self):
+        print(self.book_list) 
 
+    def add_book(self):
+        book = input("Enter book name : ").capitalize()
+        if book == "" or " ":
+            print("Invalid Book name!")
+        else:
+            self.book_list.append(book)   
 
+    def lend_book(self):
+        book = input("Enter book name : ").capitalize()
+        if book not in self.book_list:
+            print("Please enter valid input")
+        if book in self.book_list:
+            name = input("Enter your name : ")
+            self.book_list.remove(book)   
+            self.lend_record[book] = name            
+        else:
+            if self.lend_record.get(book):
+                print(f"Book does not exist in library this book taken by {self.lend_record[book]}")
 
-books = ["The Pshycology of Money", "Intelligent Investor", "Rich Dad Poor Dad", "Cashflow Quadrants", "Shrimad Bhagwat Gita"]
-library_1 = Library(books, "library 1")
+    def return_book(self):
+        book = input("Enter book name : ").capitalize()
+        if book in self.lend_record:
+            self.book_list.append(book)      
+            del self.lend_record[book]
+        else:
+            print("Please enter valid input")             
 
-while True:
-    usrinp = input("What do you wish to do?\n1.Display Book\n2.Lend Book \n3.Add Book\n4.Return Book\n\n:")
+if __name__=='__main__':
+    book_list = ['C++','Java','JavaScript','Python','Ruby','Pearl']
+    library = Library(book_list, 'library')
 
-    if usrinp == "display":
-        x = library_1.disp_book()
-        y = library_1.libraryName()
-        print(x, y)
-    elif usrinp == "add":
-        z = library_1.add_book(input("Which book do you wish to add?\n"))
-    elif usrinp == "lend":
-        bookname = input("Which book do you wish to lend?\n")
-        Pname = input("What is your Name: ")
-        len = library_1.lend_book(bookname,Pname)
-    elif usrinp == "return":
-        ret = library_1.return_book(input("Which book do you wish to return?\n"))
-    else:
-        print("Invalid Operation")
-
-
-
-
+    while True:
+        user = input("\nD for Display book, A for Add book, L for lend book, R for return book, and Q for exit :")
+        if user == "Q" or user == "q":
+            break
+        elif user == "display" or user == "d" or user == "D":
+            library.display_book()
+        elif user == "add" or user == "a" or user == "A":
+            library.add_book()
+        elif user == "lend" or user == "l" or user == "L":
+            library.lend_book()
+        elif user == "return" or user == "r" or user == "R":
+            library.return_book()
+        
