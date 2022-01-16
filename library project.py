@@ -11,7 +11,6 @@
 # asking users for their input
 
 
-
 class Library:
     def __init__(self, book_list, library_name):
         self.book_list = book_list
