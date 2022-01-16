@@ -12,9 +12,6 @@
 
 
 
-from xml.dom import InvalidCharacterErr
-
-
 class Library:
     def __init__(self, book_list, library_name):
         self.book_list = book_list
