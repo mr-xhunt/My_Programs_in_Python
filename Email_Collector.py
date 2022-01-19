@@ -1,3 +1,5 @@
+import re
+
 str = '''
 CodeWithHarry
 Home
@@ -125,7 +127,7 @@ When you go to a website and click on the contact section, by pressing CTRL+A, a
 abc123@gmail.com
 
 cdf456@gmail.com
-
+mayankcho@gmail.com
  
 
 
@@ -151,6 +153,18 @@ Next
 CodeWithHarry
 Copyright © 2022 CodeWithHarry.com
 
+mayankcho23@gmail.com
 Python Exercise 11: Regex Email Extractor | Python Tutorials For Absolute Beginners In Hindi #96 | CodeWithHarry
 '''
+
+
+
+matches = re.findall(r"[\w._%+-]{1,20}@[\w]{2,20}.[A-Za-z]{2,3}", str)
+# for match in matches:
+#     print(match)
+
+
+with open("email_lists.txt", "w") as get_email:
+    for email in matches:
+        get_email.write(email + "\n")
 
