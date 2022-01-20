@@ -139,32 +139,22 @@ Have you solved this task? If yes, then it is time to check your solution. The s
 
 Code as described/written in the video
 
-# Email Collector
-str ='''
-2
-'''
-# email1
-# email2
-# email3
-
 Previous
 Next
 
 CodeWithHarry
 Copyright © 2022 CodeWithHarry.com
-
 mayankcho23@gmail.com
+mayank@gmail.edu.in
 Python Exercise 11: Regex Email Extractor | Python Tutorials For Absolute Beginners In Hindi #96 | CodeWithHarry
 '''
 
 
 
-matches = re.findall(r"[\w._%+-]{1,20}@[\w]{2,20}.[A-Za-z]{2,3}", str)
-# for match in matches:
-#     print(match)
+email = re.findall(r"[0-9a-zA-Z._]+@[0-9a-zA-Z._]+[.][[0-9a-zA-Z]+", str)
 
 
 with open("email_lists.txt", "w") as get_email:
-    for email in matches:
+    for email in email:
         get_email.write(email + "\n")
 
