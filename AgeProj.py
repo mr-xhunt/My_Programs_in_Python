@@ -1,5 +1,3 @@
-import math
-
 class Age:    
     def Age_in_2090(self):
         age_dob = input ("Enter your age or dob:  ")
