@@ -5,7 +5,7 @@
 #  third by using one of a built in function
 
 
-food_calories=list(map(int,input("Enter The Calories:").split()))
+food_calories=list(input("Enter The Calories:").split(","))
 print(food_calories)
 
 l2=list(reversed(food_calories))
