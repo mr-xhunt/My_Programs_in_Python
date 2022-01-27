@@ -1,6 +1,5 @@
-import csv
 from nsetools import Nse
-import requests
+import pandas as pd
 
 '''
 YOU MUST NEED TO DOWNLOAD NIFTY50 CSV FILE TO BEGIN WITH AND PLACE THE FILE IN SAME FOLDER AS YOU PLACE THIS PYTHON FILE
@@ -12,24 +11,22 @@ NIFTY NEXT 50 : https://www1.nseindia.com/content/indices/ind_niftynext50list.cs
 '''
 
 
-with open('ind_nifty50list.csv', "r") as s:    
-    reader = csv.DictReader(s)
-    for column in reader:
-        nifty50 = column['Symbol']
-        print(nifty50)
-    
-# nse = Nse()
-# print(nse)
+data = pd.read_csv("ind_nifty50list.csv")
+df = data.head(50)
+  
+nifty50 = df["Symbol"].tolist()
 
-# nifty50 = nse.get_stock_codes('NIFTY 50')
 
-# print(nifty50)
+nse = Nse()
 
-# quote = nse.get_quote('sbin')
-# print(quote)
+def mx_int_scan():
+    for company in nifty50:
+        quote = nse.get_quote(str(company))
+        company_name = str(quote['companyName'])
+        curr_price = str(quote['closePrice'])
+        highest_price = str(quote['high52'])
+        lowest_price = str(quote['low52'])
+        print(f"{company_name} : Current Price = {curr_price} : High52 = {highest_price} : Low52 = {lowest_price} ")
 
-# print(quote['companyName'])
-# print("52 week High: " +str(quote['high52']))
-# print("52 week Low: " + str(quote['low52']))
 
-# print("Current Price : " + str(quote['closePrice']))
+mx_int_scan()
